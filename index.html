@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For My Love</title>
+
+<style>
+body{
+    margin:0;
+    background: linear-gradient(135deg,#ffdde1,#ee9ca7);
+    font-family: 'Segoe UI', sans-serif;
+    text-align:center;
+    overflow:hidden;
+    color:black;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    width:100%;
+    height:100%;
+    background-image: radial-gradient(white 1px, transparent 1px);
+    background-size: 30px 30px;
+    opacity:0.3;
+}
+
+.container{
+    position:relative;
+    top:8vh;
+}
+
+h1{
+    font-size:42px;
+}
+
+input{
+    padding:12px;
+    font-size:16px;
+    border-radius:10px;
+    border:1px solid #ccc;
+    width:220px;
+    margin-top:10px;
+}
+
+button{
+    padding:12px 25px;
+    margin:10px;
+    border:none;
+    border-radius:30px;
+    font-size:16px;
+    background:white;
+    color:black;
+    cursor:pointer;
+    box-shadow:0 10px 25px rgba(0,0,0,0.2);
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.1);
+}
+
+/* NO button chaos mode 😄 */
+#noBtn{
+    position:relative;
+    transition:0.2s;
+}
+
+.card{
+    display:none;
+    margin-top:25px;
+    padding:25px;
+    width:60%;
+    margin-left:auto;
+    margin-right:auto;
+    background:rgba(255,255,255,0.92);
+    border-radius:25px;
+    font-size:20px;
+    line-height:1.3;
+    box-shadow:0 20px 40px rgba(0,0,0,0.2);
+    max-height:45vh;
+    overflow-y:auto;
+}
+
+.locked{
+    margin-top:15px;
+    font-size:18px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>For My Love</h1>
+
+    <div id="startBox">
+        <p>Enter your name to continue 💌</p>
+        <input id="nameInput" placeholder="Your Name">
+        <br><br>
+
+        <p>Do you love me?</p>
+
+        <button onclick="yesClicked()">YES ❤️</button>
+        <button id="noBtn" onmouseover="moveNo()">NO 💔</button>
+
+        <p id="msg" class="locked"></p>
+    </div>
+
+    <div id="letter" class="card"></div>
+</div>
+
+<script>
+
+const messages=[
+"Hi <b>Miss Highness</b>,",
+"I hope you will have a small smile while looking into this letter.",
+"You are the most beautiful and amazing person and that's mine.",
+"You are my sunshine on a cloudy day.",
+"You are the first best thing that happened to me.",
+"I am really lucky to have you.",
+"I love you more than you know ❤️",
+"<br><br><b>With love,</b>",
+"<b>Your bachcha ❤️</b>"
+];
+
+/* NO button now moves more far 😄 */
+function moveNo(){
+    const btn=document.getElementById("noBtn");
+
+    const x = (Math.random() * 400 - 200); // increased range
+    const y = (Math.random() * 200 - 100); // increased range
+
+    btn.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+/* NAME CHECK */
+function yesClicked(){
+    const name=document.getElementById("nameInput").value.trim().toLowerCase();
+
+    if(name !== "laals"){
+        document.getElementById("msg").innerText = "Love eyyyy ledhu 😛 \n Try giving the correct name!";
+        return;
+    }
+
+    document.getElementById("startBox").style.display="none";
+
+    const card=document.getElementById("letter");
+    card.style.display="block";
+
+    let i=0;
+
+    function type(){
+        if(i < messages.length){
+            card.innerHTML += messages[i] + "<br><br>";
+            i++;
+            setTimeout(type,600);
+        }
+    }
+
+    type();
+}
+
+</script>
+
+</body>
+</html>
